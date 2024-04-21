@@ -5,26 +5,22 @@ export default function Comics({ data, onClick }) {
   return (
     <div className="comics">
       {data.map((dataItem) => {
-        const detailsUrl = dataItem.urls.find(
-          (element) => element["type"] === "detail"
-        ).url;
-
+        // Construa a URL da imagem
+        const imageUrl = dataItem.thumbnail;
+        
         return (
-          <a
+          <div
             key={dataItem.id}
             className="comicCard"
             style={{
-              background: `url(${dataItem.thumbnail.path}.${dataItem.thumbnail.extension}) no-repeat center`,
+              background: `url(${imageUrl}) no-repeat center`,
               backgroundSize: "cover",
             }}
             onClick={() => onClick(dataItem.id)}
-            href={detailsUrl}
-            target="_blank"
-            rel="noreferrer"
           >
             <div className="caption">{dataItem.title}</div>
-            <div className="caption bottom">View Comic Details</div>
-          </a>
+            <div className="caption bottom">View Comics</div>
+          </div>
         );
       })}
     </div>

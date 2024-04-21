@@ -23,17 +23,17 @@ export default function Search() {
       .then((response) => response.json())
       .then((result) => {
         setCharacterData(result);
-        console.log(result);
       })
       .catch(() => {
         console.log("error while getting character data");
       });
   };
 
-  const getComicData = (characterId) => {
-    window.scrollTo({ top: 0, left: 0 });
+  const getAllComicData = () => {
+    setCharacterData(null);
+    setComicData(null);
 
-    const url = `http://localhost:3000/characters/${characterId}`;
+    const url = 'http://localhost:3000/comics';
 
     fetch(url)
       .then((response) => response.json())
@@ -42,9 +42,24 @@ export default function Search() {
         console.log(result);
       })
       .catch(() => {
-        console.log("error while getting comic data");
+        console.log("error while getting character data");
       });
   };
+
+  // const getComicData = (characterId) => {
+  //   window.scrollTo({ top: 0, left: 0 });
+
+  //   const url = `http://localhost:3000/characters/${characterId}`;
+
+  //   fetch(url)
+  //     .then((response) => response.json())
+  //     .then((result) => {
+  //       setComicData(result);
+  //     })
+  //     .catch(() => {
+  //       console.log("error while getting comic data");
+  //     });
+  // };
 
   const handleChange = (event) => {
     setCharacterName(event.target.value);
@@ -66,7 +81,7 @@ export default function Search() {
         />
         <div className="buttons">
           <button type="submit">Get Characters</button>
-          <button type="submit">Get Comics</button>
+          <button type="submit" onClick={getAllComicData}>Get Comics</button>
           <button type="reset" className="reset" onClick={handleReset}>
             Reset
           </button>
@@ -75,11 +90,11 @@ export default function Search() {
       
 
       {!comicData && characterData && characterData[0] && (
-        <Characters data={characterData} onClick={getComicData} />
+        <Characters data={characterData} onClick={getAllComicData} /> //TODO
       )}
 
       {comicData && comicData[0] && (
-        <Comics data={comicData} onClick={() => {}} />
+        <Comics data={comicData} onClick={getAllComicData} />
       )}
     </>
   );
