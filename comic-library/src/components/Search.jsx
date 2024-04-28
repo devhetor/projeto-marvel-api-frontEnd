@@ -9,18 +9,26 @@ export default function Search() {
   const [comicData, setComicData] = useState(null);
   const [creatorsData, setCreatorsData] = useState(null);
   const [characterName, setCharacterName] = useState("");
+  const [showCharacters, setShowCharacters] = useState(false);
+  const [showComics, setShowComics] = useState(false);
+  const [showCreators, setShowCreators] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    getCharacterData();
+    if (showCharacters) {
+      getCharacterData();
+    } else if (showComics) {
+      getAllComicData();
+    } else if (showCreators) {
+      getAllCreatorsData();
+    }
   };
 
   const getCharacterData = () => {
     setCharacterData(null);
     setComicData(null);
-
+    setCreatorsData(null);
     const url = 'http://localhost:3000/characters';
-
     fetch(url)
       .then((response) => response.json())
       .then((result) => {
@@ -34,16 +42,15 @@ export default function Search() {
   const getAllComicData = () => {
     setCharacterData(null);
     setComicData(null);
-
+    setCreatorsData(null);
     const url = 'http://localhost:3000/comics';
-
     fetch(url)
       .then((response) => response.json())
       .then((result) => {
         setComicData(result);
       })
       .catch(() => {
-        console.log("error while getting character data");
+        console.log("error while getting comic data");
       });
   };
 
@@ -51,36 +58,16 @@ export default function Search() {
     setCharacterData(null);
     setComicData(null);
     setCreatorsData(null);
-
-
     const url = 'http://localhost:3000/creators';
-
     fetch(url)
       .then((response) => response.json())
       .then((result) => {
-        setComicData(result);
+        setCreatorsData(result);
       })
       .catch(() => {
-        console.log("error while getting character data");
+        console.log("error while getting creators data");
       });
   };
-
-  //TODO
-
-  // const getComicData = (characterId) => {
-  //   window.scrollTo({ top: 0, left: 0 });
-
-  //   const url = `http://localhost:3000/characters/${characterId}`;
-
-  //   fetch(url)
-  //     .then((response) => response.json())
-  //     .then((result) => {
-  //       setComicData(result);
-  //     })
-  //     .catch(() => {
-  //       console.log("error while getting comic data");
-  //     });
-  // };
 
   const handleChange = (event) => {
     setCharacterName(event.target.value);
@@ -91,11 +78,13 @@ export default function Search() {
     setCharacterData(null);
     setComicData(null);
     setCreatorsData(null);
+    setShowCharacters(false);
+    setShowComics(false);
+    setShowCreators(false);
   };
 
   return (
     <>
-
       <img className="img" src="https://static.wikia.nocookie.net/logocomics/images/d/d2/1602%282003-2004%29.png" alt="logo" />
       <form className="search" onSubmit={handleSubmit}>
         <input
@@ -104,25 +93,24 @@ export default function Search() {
           onChange={handleChange}
         />
         <div className="buttons">
-          <button type="submit">Characters</button>
-          <button type="submit" onClick={getAllComicData}>Comics</button>
-          <button type="submit" onClick={getAllCreatorsData}>Creators</button>
+          <button type="submit" onClick={() => { setShowCharacters(true); setShowComics(false); setShowCreators(false); }}>Characters</button>
+          <button type="submit" onClick={() => { setShowCharacters(false); setShowComics(true); setShowCreators(false); }}>Comics</button>
+          <button type="submit" onClick={() => { setShowCharacters(false); setShowComics(false); setShowCreators(true); }}>Creators</button>
           <button type="reset" className="reset" onClick={handleReset}>
             Reset
           </button>
         </div>
       </form>
 
-
-      {!comicData && characterData && characterData[0] && (
-        <Characters data={characterData} onClick={getAllComicData} /> //TODO
+      {showCharacters && characterData && characterData[0] && (
+        <Characters data={characterData} onClick={getAllComicData} />
       )}
 
-      {comicData && comicData[0] && (
+      {showComics && comicData && comicData[0] && (
         <Comics data={comicData} onClick={getAllComicData} />
       )}
 
-      {creatorsData && creatorsData[0] && (
+      {showCreators && creatorsData && creatorsData[0] && (
         <Creators data={creatorsData} onClick={getAllCreatorsData} />
       )}
     </>

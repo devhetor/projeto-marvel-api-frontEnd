@@ -7,7 +7,6 @@ export default function Creators({ data, onClick }) {
         {data.map((dataItem) => {
           // Construa a URL da imagem
           const imageUrl = dataItem.thumbnail;
-          console.log(dataItem.fullName)
           
           return (
             <div
@@ -27,4 +26,3 @@ export default function Creators({ data, onClick }) {
       </div>
     );
 }
-  

@@ -19,7 +19,7 @@ export default function Comics({ data, onClick }) {
             onClick={() => onClick(dataItem.id)}
           >
             <div className="caption">{dataItem.title}</div>
-            <div className="caption bottom">View Comics</div>
+            <div className="caption bottom">View Characters</div>
           </div>
         );
       })}
