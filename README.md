@@ -4,8 +4,6 @@
 
 Welcome to my Marvel comics 1602 project, this project was developed during an academic activity to practice knowledge with typescript, where the objective was to create an application in the back-end to fetch information from the Marvel API. With this in progress, I decided to create my first front-end project using React.
 
-At the moment some routes are being implemented, but it is now possible to return all characters, comics and creators from the back-end and show them on the screen.
-
 ![home-screen](https://github.com/devhetor/assets/blob/800d97d58e99f778162c8d28f6b39262721cfdd4/Captura%20de%20tela%202024-04-30%20095901.png)
 
 ![comic-screen](https://github.com/devhetor/assets/blob/800d97d58e99f778162c8d28f6b39262721cfdd4/Captura%20de%20tela%202024-04-30%20100006.png)
@@ -16,6 +14,10 @@ The front-end design wasn't done by me, I was looking for inspiration on YouTube
 
 [https://youtu.be/l6-et1iNWMk?si=J6vk4fKCje_0N4FO](https://youtu.be/l6-et1iNWMk?si=J6vk4fKCje_0N4FO)
 
+## 🛠️ Technologies used
+- Reac
+- SCSS
+- VITE
 ## 🚀 Getting Started
 
 ### ⚠️ Attention ⚠️
